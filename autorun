@@ -1,0 +1,3 @@
+#! /bin/bash
+cd /home/yuzhou/AndroidStudioProjects/covid_json 
+/usr/bin/python us_covid.py

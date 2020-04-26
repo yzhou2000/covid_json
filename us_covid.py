@@ -4,4 +4,5 @@ df = pd.read_csv(url)
 df=df[['date','county','state','cases','deaths']]
 df.to_json(r'./us_covid.json' , orient = 'records',lines=True)
 
-
+tn_df=df[[df['state' == 'Tennessee']]]
+df.to_json(r'./tn.json' , orient = 'records',lines=True)

@@ -3,9 +3,9 @@ import pandas as pd
 url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv'
 df = pd.read_csv(url)
 #getting uszip data
-uszip = pd.read_csv('/home/yuzhou/AndroidStudioProjects/covid_json/uszip.csv')
+uszip = pd.read_csv('/home/yuzhou/AndroidStudioProjects/covid_json/uszip.csv',dtype={"ZIP":"string"})
 
-uszipcounty=uszip[['county','state','ZIP']].dropna()
+uszipcounty=uszip[['ZIP','county','state']].dropna()
 uszipcounty.to_json('./us_zip.json' , orient = 'records')
 
 uscounty=uszip[['county','state','msa']].dropna()

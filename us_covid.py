@@ -6,7 +6,7 @@ df = pd.read_csv(url)
 uszip = pd.read_csv('/home/yuzhou/AndroidStudioProjects/covid_json/uszip.csv')
 
 uszipcounty=uszip[['county','state','ZIP']].dropna()
-us_zip.to_json('./us_zip.json' , orient = 'records')
+uszipcounty.to_json('./us_zip.json' , orient = 'records')
 
 uscounty=uszip[['county','state','msa']].dropna()
 

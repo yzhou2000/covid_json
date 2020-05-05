@@ -39,5 +39,5 @@ for state, df_state in df.groupby('state'):
     
 
 
-#tndf=df[df['state'] == 'Tennessee']
-#tndf.to_json('./tn.json' , orient = 'records')
+tndf=df[df['state'] == 'Tennessee']
+tndf.to_json('./tn.json' , orient = 'records')

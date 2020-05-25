@@ -6,6 +6,8 @@ df = pd.read_csv(url)
 uszip = pd.read_csv('/home/yuzhou/AndroidStudioProjects/covid_json/uszip.csv',dtype={"ZIP":"string"})
 
 uszipcounty=uszip[['ZIP','county','msa']].dropna()
+uszipcounty.to_csv('/home/yuzhou/AndroidStudioProjects/covid_json/Place.csv',index=False)
+
 uszipcounty.to_json('./us_zip.json' , orient = 'records')
 
 uscounty=uszip[['county','state','msa']].dropna()
@@ -33,7 +35,7 @@ us_states.to_json('./us_states_covid.json' , orient = 'records')
 usstate_name=uszip[['state','st_code']].drop_duplicates(subset=['state'],keep='first').set_index('state')['st_code'].to_dict()
 #print(usstate_name['Tennessee'])
 #output the dataset by states
-df=df[~df['state'].isin(['Northern Mariana Islands'])]
+df=df[~df['state'].isin(['Northern Mariana Islands','Guam','Puerto Rico'])]
 for state, df_state in df.groupby('state'):
   df_state.to_json('./' + usstate_name[state] +'.json', orient ='records')
     

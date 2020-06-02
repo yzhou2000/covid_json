@@ -15,16 +15,19 @@ uscounty.drop_duplicates(subset=["county","state"],keep='first',inplace=True)
 
 
 df=df[['date','county','state','cases','deaths']]
+df=df.sort_values(by=['state','county','date'])
+df['new cases'] = df.groupby(['state','county'])['cases'].diff().fillna(0)
+df['new deaths'] = df.groupby(['state','county'])['deaths'].diff().fillna(0)
 
 #create covid19 dataset by msa
 msa=pd.merge(df,uscounty,on=['county','state'],how="left")
-us_msa = msa.groupby(['msa','date'],as_index=False).agg({"cases":"sum","deaths":"sum"})
+us_msa = msa.groupby(['msa','date'],as_index=False).agg({"cases":"sum","deaths":"sum","new cases":"sum","new deaths":"sum"})
 us_msa.to_json('./us_msa_covid.json' , orient = 'records')
 
 
 #create covid19 dataset by state
 
-us_states = df.groupby(['state','date'],as_index=False).agg({"cases":"sum","deaths":"sum"})
+us_states = df.groupby(['state','date'],as_index=False).agg({"cases":"sum","deaths":"sum","new cases":"sum","new deaths":"sum"})
 
 
 us_states.to_json('./us_states_covid.json' , orient = 'records')
